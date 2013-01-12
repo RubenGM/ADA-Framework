@@ -27,7 +27,7 @@ import com.desandroid.framework.ada.annotations.RegularExpressionValidation;
 
 /**
  * This class implement the logic of the Regular Expression Validations. 
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 public class ExpressionValidator extends Validator {

@@ -24,7 +24,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Internal class dedicated to Database Schema management and Database connections management.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 class DataBaseHelper extends SQLiteOpenHelper {

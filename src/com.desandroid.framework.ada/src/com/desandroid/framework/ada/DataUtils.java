@@ -25,7 +25,7 @@ import java.util.Date;
 
 /**
  * Internal Framework Utils class.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 final class DataUtils {

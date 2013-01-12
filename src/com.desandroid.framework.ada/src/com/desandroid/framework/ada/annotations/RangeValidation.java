@@ -27,7 +27,7 @@ import com.desandroid.framework.ada.validators.RangeValidator;
 
 /**
  * Annotation to define Required Field Validation.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

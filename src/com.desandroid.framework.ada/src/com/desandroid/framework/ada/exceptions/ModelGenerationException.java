@@ -21,7 +21,7 @@ package com.desandroid.framework.ada.exceptions;
 
 /**
  * InaccessibleObjectSetException exception.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 @SuppressWarnings("serial")

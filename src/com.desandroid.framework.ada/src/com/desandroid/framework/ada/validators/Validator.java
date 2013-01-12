@@ -25,7 +25,7 @@ import com.desandroid.framework.ada.Entity;
 
 /**
  * Base class for all validations.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 public abstract class Validator {

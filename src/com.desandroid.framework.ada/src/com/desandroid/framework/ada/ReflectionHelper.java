@@ -34,7 +34,7 @@ import com.desandroid.framework.ada.exceptions.AdaFrameworkException;
 
 /**
  * Entity ObjectSet.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 class ReflectionHelper {

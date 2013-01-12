@@ -49,7 +49,7 @@ import com.desandroid.framework.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Entity ObjectSet.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 @SuppressWarnings("serial")
@@ -64,7 +64,6 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	private String dataBaseUniqueTableFields = "";
 	private ArrayAdapter<T> dataAdapter;
 	private boolean deleteOnCascade = true;
-	//private Dictionary<Class<?>, ObjectSet<Entity>> inheritedObjectSets = new Hashtable<Class<?>, ObjectSet<Entity>>();
 	private List<ObjectSet<Entity>> inheritedObjectSets = new ArrayList<ObjectSet<Entity>>();
 	
 	private ObjectSetEventsListener objectSetEventsListener;
@@ -250,13 +249,22 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * @throws AdaFrameworkException 
 	 */
 	public ObjectSet(Class<T> pManagedType, ObjectContext pContext) throws AdaFrameworkException { 
+		 this(pManagedType, pContext, null);
+	}
+	
+	public ObjectSet(Class<T> pManagedType, ObjectContext pContext, String pTableName) throws AdaFrameworkException { 
 		try{
 			
 			this.ownerEntityType = null;
 			this.dataContext = pContext;
 			this.managedType = pManagedType;
 			
-			loadDataTableName(pManagedType, null, null, Entity.DATATYPE_EMPTY); //Always First;
+			if (pTableName == null) {
+				loadDataTableName(pManagedType, null, null, Entity.DATATYPE_EMPTY); //Always First;
+		    } else {
+				this.dataBaseTableName = pTableName;
+			}
+			
 			this.dataMappings = loadDataMappings(this.managedType);
 			this.dataBaseTableFields = loadDataBaseTableFields();
 			
@@ -266,7 +274,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			
 		} catch (Exception e) {
 			ExceptionsHelper.manageException(this, e);
-		} 
+		}
 	}
 	
 	/**
@@ -487,7 +495,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	void fillList(Boolean pDistinct, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit, Integer pOwnerID, Entity pParent) throws AdaFrameworkException {
 		fillList(null, pDistinct, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit, pOwnerID, pParent);
 	}
-	
+		
 	void fillList(SQLiteDatabase pDataBase, Boolean pDistinct, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit, Integer pOwnerID, Entity pParent) throws AdaFrameworkException {
 		Boolean manageDatabase = false;
 		SQLiteDatabase database = pDataBase;
@@ -505,7 +513,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				fillLazyList(database, pDistinct, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit, pOwnerID, pParent);
 			}
 
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			ExceptionsHelper.manageException(this, e);
 		} finally {
 			if (manageDatabase) {
@@ -683,7 +691,11 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * @throws AdaFrameworkException
 	 */
 	public List<T> search(Boolean pDistinct, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
-		return searchList(null, pDistinct, this.dataBaseTableFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
+		return searchList(null, this.dataBaseTableName, pDistinct, this.dataBaseTableFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
+	}
+	
+	public List<T> search(Boolean pDistinct, String pTableName, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
+		return searchList(null, pTableName, pDistinct, this.dataBaseTableFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
 	}
 	
 	/**
@@ -701,11 +713,15 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * @throws AdaFrameworkException
 	 */
 	public List<T> search(Boolean pDistinct, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
-		return searchList(null, pDistinct, pFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
+		return searchList(null, this.dataBaseTableName, pDistinct, pFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
+	}
+	
+	public List<T> search(String pTableName, Boolean pDistinct, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
+		return searchList(null, pTableName, pDistinct, pFields, pWherePattern, pWhereValues, pOrderBy, pGroupBy, pHaving, pOffset, pLimit);
 	}
 	
 	@SuppressWarnings("unchecked")
-	List<T> searchList(SQLiteDatabase pDataBase, Boolean pDistinct, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
+	List<T> searchList(SQLiteDatabase pDataBase, String pTableName, Boolean pDistinct, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
 		List<T> returnedValue = null;
 		Date initOfProcess = new Date();
 		Boolean manageDatabase = false;
@@ -796,15 +812,27 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * @throws Exception
 	 */
 	public T getElementByID(Long pId) throws AdaFrameworkException {
-		return getElementByID(null, pId);
+		return getElementByID((SQLiteDatabase)null, pId);
+	}
+	
+	public T getElementByID(String pTableName, Long pId) throws AdaFrameworkException {
+		return getElementByID(null, pTableName, pId);
 	}
 	
 	public T getElementByID(SQLiteDatabase pDatabase, Long pId) throws AdaFrameworkException {
 		return getElementByID(pDatabase, pId, null);
 	}
 	
-	@SuppressWarnings("unchecked")
+	public T getElementByID(SQLiteDatabase pDatabase, String pTableName, Long pId) throws AdaFrameworkException {
+		return getElementByID(pDatabase, pTableName, pId, null);
+	}
+	
 	public T getElementByID(SQLiteDatabase pDatabase, Long pId, Entity pParent) throws AdaFrameworkException {
+		return getElementByID(pDatabase, this.dataBaseTableName, pId, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T getElementByID(SQLiteDatabase pDatabase, String pTableName, Long pId, Entity pParent) throws AdaFrameworkException {
 		T returnedValue = null;
 		SQLiteDatabase database = pDatabase;
 		Cursor entitiesCursor = null;
@@ -822,7 +850,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			
 			
 			if (database != null) {
-				entitiesCursor = getContext().executeQuery(database, false, this.getDataBaseTableName(), this.dataBaseTableFields, whereFormat, whereValues, null, null, null, null);
+				entitiesCursor = getContext().executeQuery(database, false, pTableName, this.dataBaseTableFields, whereFormat, whereValues, null, null, null, null);
 				
 				if (entitiesCursor != null) {
 					entitiesCursor.moveToLast();
@@ -1094,15 +1122,18 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 		if (database != null) {
 			switch(pEntity.getStatus()) {
 				case Entity.STATUS_NEW:
-					saveNewEntity(database, pEntity, pOwnerID);
+					saveNewEntity(pDataBase, pEntity, pOwnerID);
 					saveInheritedEntities(pDataBase, pEntity);
+					saveLinkedEntities(pDataBase, pEntity);
 					break;
 				case Entity.STATUS_UPDATED:
-					saveUpdatedEntity(database, pEntity, pOwnerID);
+					saveUpdatedEntity(pDataBase, pEntity, pOwnerID);
 					saveInheritedEntities(pDataBase, pEntity);
+					saveLinkedEntities(pDataBase, pEntity);
 					break;
 				case Entity.STATUS_DELETED:
-					saveDeletedEntity(database, pEntity, pOwnerID);
+					saveDeletedLinkedEntity(pDataBase, pEntity);
+					saveDeletedEntity(pDataBase, pEntity, pOwnerID);
 					break;
 			}
 		}

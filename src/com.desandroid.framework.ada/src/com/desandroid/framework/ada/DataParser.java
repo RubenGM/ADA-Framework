@@ -21,7 +21,7 @@ package com.desandroid.framework.ada;
 
 /**
  * Data parser class.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 public class DataParser {

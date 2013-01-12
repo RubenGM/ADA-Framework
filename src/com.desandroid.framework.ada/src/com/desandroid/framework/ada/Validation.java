@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 
 /**
  * Define the internal structure of validation.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 final class Validation {

@@ -21,7 +21,7 @@ package com.desandroid.framework.ada.validators;
 
 /**
  * This class represent the result of an individual validation process.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 public final class ValidationResult {

@@ -29,7 +29,7 @@ import com.desandroid.framework.ada.DataParser;
 
 /**
  * Annotation to define data binding between the Entity object and the UI View control.
- * @version 2.2.0
+ * @version 2.2.1
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)
