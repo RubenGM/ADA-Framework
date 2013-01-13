@@ -49,7 +49,7 @@ import com.desandroid.framework.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Entity ObjectSet.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 @SuppressWarnings("serial")
@@ -756,7 +756,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			}
 			
 			if (database != null) {				
-				entitiesCursor = getContext().executeQuery(database, distinct, this.dataBaseTableName, pFields, whereFormat, whereValues, groupBy, having, orderBy, limit);
+				entitiesCursor = getContext().executeQuery(database, distinct, pTableName, pFields, whereFormat, whereValues, groupBy, having, orderBy, limit);
 				
 				if (entitiesCursor != null) {
 					entitiesCursor.moveToLast();

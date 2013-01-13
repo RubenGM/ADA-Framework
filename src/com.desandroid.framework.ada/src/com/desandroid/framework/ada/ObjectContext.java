@@ -47,7 +47,7 @@ import com.desandroid.framework.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Object Context for the DataBase Entities management.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 public class ObjectContext {

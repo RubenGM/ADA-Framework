@@ -28,7 +28,7 @@ import com.desandroid.framework.ada.validators.ExpressionValidator;
 
 /**
  * Annotation to define Required Field Validation.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

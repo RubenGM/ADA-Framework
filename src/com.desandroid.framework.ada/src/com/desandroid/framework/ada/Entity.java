@@ -42,7 +42,7 @@ import com.desandroid.framework.ada.validators.Validator;
 
 /**
  * Represents the smallest unit to be implemented by the Entities.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 public abstract class Entity {

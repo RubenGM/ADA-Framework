@@ -26,7 +26,7 @@ import com.desandroid.framework.ada.Entity;
 
 /**
  * This class implement the logic to validate the required fields validations. 
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 public final class RequiredValidator extends Validator {

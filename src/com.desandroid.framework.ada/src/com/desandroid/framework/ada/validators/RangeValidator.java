@@ -25,7 +25,7 @@ import com.desandroid.framework.ada.annotations.RangeValidation;
 
 /**
  * This class implement the logic of the Range Validations. 
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 public class RangeValidator extends Validator {

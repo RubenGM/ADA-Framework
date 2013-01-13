@@ -29,7 +29,7 @@ import com.desandroid.framework.ada.Entity;
 
 /**
  * Annotation to define DataBase table field information.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

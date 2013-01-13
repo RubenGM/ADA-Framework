@@ -25,7 +25,7 @@ import android.util.Log;
 
 /**
  * The class encapsulate the exceptions management.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 class ExceptionsHelper {

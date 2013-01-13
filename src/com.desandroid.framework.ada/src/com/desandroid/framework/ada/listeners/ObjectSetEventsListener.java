@@ -23,7 +23,7 @@ import com.desandroid.framework.ada.ObjectSet;
 
 /***
  * Define the events fired by the ObjectSets.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 public interface ObjectSetEventsListener {

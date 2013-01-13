@@ -21,7 +21,7 @@ package com.desandroid.framework.ada.exceptions;
 
 /**
  * Framework generic exception.
- * @version 2.2.1
+ * @version 2.2.2
  * @author Mob&Me
  */
 @SuppressWarnings("serial")
