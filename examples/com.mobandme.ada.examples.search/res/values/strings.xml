@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ADA Framework Search Example</string>
+	<string name="search_by_author">Search by Author</string>
+	<string name="search_by_category">Search by Category</string>
+	
+</resources>
