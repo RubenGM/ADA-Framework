@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal">
+
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/label_test_iterations"
+        android:textSize="20sp" />
+    
+    <TextView 
+        android:id="@+id/labelOrmTestResult"
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/label_orm_execution_time"
+        android:textSize="20sp" />
+    
+    <TextView 
+        android:id="@+id/labelAdaTestResult"
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/label_ada_execution_time"
+        android:textSize="20sp" />
+    
+    <Button 
+        android:layout_marginTop="20dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_orm_stress_test"
+        android:onClick="execute_ORM_Lite_Test"/>
+    
+    <Button 
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_ada_stress_test_1"
+        android:onClick="execute_ADA_Framework_Test_1"/>
+    
+    <Button 
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_ada_stress_test_2"
+        android:onClick="execute_ADA_Framework_Test_2"/>
+    
+    <Button 
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_clear_results"
+        android:onClick="clear_Results"/>
+    
+</LinearLayout>

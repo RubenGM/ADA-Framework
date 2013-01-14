@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">ORM Lite vs ADA Framework</string>
+	
+    <string name="label_test_iterations">Test Iterarions: 100</string>
+    <string name="label_orm_execution_time">ORM Execution Time: 00:00.000</string>
+    <string name="label_ada_execution_time">ADA Execution Time: 00:00.000</string>
+    <string name="label_orm_execution_time_pattern">ORM Execution Time: %s</string>
+    <string name="label_ada_execution_time_pattern">ADA Execution Time: %s</string>
+    <string name="label_orm_stress_test">Execute ORM Lite Stress Test</string>
+    <string name="label_ada_stress_test_1">Execute ADA Framework Stress Test 1</string>
+    <string name="label_ada_stress_test_2">Execute ADA Framework Stress Test 2</string>
+    <string name="label_clear_results">Clear Results</string>
+</resources>
