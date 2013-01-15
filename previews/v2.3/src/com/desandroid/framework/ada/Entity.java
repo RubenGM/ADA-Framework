@@ -47,6 +47,22 @@ import com.desandroid.framework.ada.validators.Validator;
  */
 public abstract class Entity {
 	final static int DATATYPE_EMPTY = 0;
+	
+	/**
+	 * Default value for Table Index Field direction.
+	 */
+	public final static int INDEX_DIRECTION_EMPTY = 0;
+	
+	/**
+	 * Ascending value for Table Index Field direction.
+	 */
+	public final static int INDEX_DIRECTION_ASC = 1;
+	
+	/**
+	 * Descending value for Table Index Field direction.
+	 */
+	public final static int INDEX_DIRECTION_DESC = 2;
+	
 	/**
 	 * Use to represent Boolean value. Use this datatype with Boolean values.
 	 */

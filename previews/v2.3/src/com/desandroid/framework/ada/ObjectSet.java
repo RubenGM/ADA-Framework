@@ -67,7 +67,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	private ArrayAdapter<T> dataAdapter;
 	private boolean deleteOnCascade = true;
 	private List<ObjectSet<Entity>> inheritedObjectSets = new ArrayList<ObjectSet<Entity>>();
-	private HashMap<String, List<String>> tableIndexes;
+	private HashMap<String, List<DataIndex>> tableIndexes;
 	
 	private ObjectSetEventsListener objectSetEventsListener;
 	private boolean dataBaseUseIndexes = DataUtils.DATABASE_USE_INDEXES;
@@ -1478,24 +1478,32 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				if (indexDefinition != null && indexDefinition.name() != null && !indexDefinition.name().trim().equals("")) {
 					
 					if (tableIndexes == null) {
-						tableIndexes = new HashMap<String, List<String>>();
+						tableIndexes = new HashMap<String, List<DataIndex>>();
 					}
 					
 					if (tableIndexes.containsKey(indexDefinition.name())) {
 						boolean addField = true;
-						for(String tableField : tableIndexes.get(indexDefinition.name())) {
-							if (tableField.equals(pMapping.DataBaseFieldName)) {
+						for(DataIndex indexField : tableIndexes.get(indexDefinition.name())) {
+							if (indexField.Name.equals(pMapping.DataBaseFieldName)) {
 								addField = false;
 								break;
 							}
 						}
 						
 						if (addField) {
-							tableIndexes.get(indexDefinition.name()).add(pMapping.DataBaseFieldName);
+							DataIndex indexConfiguration = new DataIndex();
+							indexConfiguration.Name = pMapping.DataBaseFieldName;
+							indexConfiguration.Direction =  indexDefinition.direction();
+							
+							tableIndexes.get(indexDefinition.name()).add(indexConfiguration);
 						}
 					} else {
-						List<String> databaseFields = new ArrayList<String>();
-						databaseFields.add(pMapping.DataBaseFieldName);
+						DataIndex indexConfiguration = new DataIndex();
+						indexConfiguration.Name = pMapping.DataBaseFieldName;
+						indexConfiguration.Direction =  indexDefinition.direction();
+						
+						List<DataIndex> databaseFields = new ArrayList<DataIndex>();
+						databaseFields.add(indexConfiguration);
 						tableIndexes.put(indexDefinition.name(), databaseFields);
 					}
 				}
@@ -1703,7 +1711,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * @param pIndexes
 	 * @return Database Index Scripts
 	 */
-	private String[] generateDataBaseTableIndexScript(HashMap<String, List<String>> pIndexes) {
+	private String[] generateDataBaseTableIndexScript(HashMap<String, List<DataIndex>> pIndexes) {
 		List<String> tableScripts = new ArrayList<String>();
 		
 		String indexFields = "";
@@ -1711,12 +1719,21 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			for(String indexName : pIndexes.keySet()) {
 				
 				indexFields = "";
-				for(String fieldName : pIndexes.get(indexName)) {
-					if (!indexFields.equals("")) {
-						fieldName = ", " + fieldName;
+				for(DataIndex field : pIndexes.get(indexName)) {
+					if (!field.Name.equals("")) {
+						if (!indexFields.equals("")) {
+							indexFields += ", ";
+						}
+					
+						indexFields += field.Name;
+						if (field.Direction == Entity.INDEX_DIRECTION_ASC)  {
+							indexFields += " ASC";
+						} else if (field.Direction == Entity.INDEX_DIRECTION_DESC)  {
+							indexFields += " DESC";
+						}
 					}
-					indexFields += fieldName; 
 				}
+				
 				tableScripts.add(String.format(DataUtils.DATABASE_TABLE_INDEX_PATTERN, indexName, this.dataBaseTableName, indexFields));
 			}
 		}

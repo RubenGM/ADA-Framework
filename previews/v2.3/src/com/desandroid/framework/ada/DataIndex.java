@@ -17,37 +17,14 @@
    Contact: Txus Ballesteros <txus.ballesteros@mobandme.com>
 */
 
-
-package com.desandroid.framework.ada.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import com.desandroid.framework.ada.Entity;
+package com.desandroid.framework.ada;
 
 /**
- * Annotation to configure DataBase table Indexes.
+ * Internal Entity fields Index Mapping class.
  * @version 2.3
  * @author Mob&Me
  */
-
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface TableIndex {
-
-	/**
-	 * Define the name of the Index into the DataBase.
-	 */
-	public String name();
-	
-	/**
-	 * Define the index filed sort direction, please, use one of this choices.
-	 * 		Entity.INDEX_DIRECTION_EMPTY
-	 * 		Entity.INDEX_DIRECTION_ASC
-	 * 		Entity.INDEX_DIRECTION_DESC
-	 * @return
-	 */
-	public int direction() default Entity.INDEX_DIRECTION_EMPTY;
+class DataIndex {
+	public String Name = "";
+	public int    Direction = Entity.INDEX_DIRECTION_EMPTY;
 }
