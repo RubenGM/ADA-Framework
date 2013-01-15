@@ -40,11 +40,11 @@ public class Product extends Entity {
 	
 	
 	@TableField(name = "ProductName", datatype = DATATYPE_STRING, required = true, unique = true)
-	@TableIndex(name = TABLE_INDEX_CATEGORY_NAME) // Configuration for Database Table Index.
+	@TableIndex(name = TABLE_INDEX_CATEGORY_NAME, direction = INDEX_DIRECTION_ASC) // Configuration for Database Table Index.
 	public String Name;
 	
 	@TableField(name = "ProductCategory", datatype = DATATYPE_STRING, required = true)
-	@TableIndex(name = TABLE_INDEX_CATEGORY_NAME) // Configuration for Database Table Index.
+	@TableIndex(name = TABLE_INDEX_CATEGORY_NAME, direction = INDEX_DIRECTION_DESC) // Configuration for Database Table Index.
 	public String Category;
 	
 	@TableField(name = "ProductPrice", datatype = DATATYPE_REAL, required = true)

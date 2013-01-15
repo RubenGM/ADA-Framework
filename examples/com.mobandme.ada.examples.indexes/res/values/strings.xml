@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ADA Framework Indexes</string>
+    <string name="app_name">ADA Framework Indexes Example</string>
     <string name="search_all">All</string>
     <string name="search_by_name">By Name</string>
     <string name="search_by_price">By Price</string>
