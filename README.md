@@ -14,10 +14,10 @@ Support for Android, version 2.2 or later..
 Support for Data Model Autogeneration, synchronize and generate automatically from the entities data model.
 
 
-Data Model Abstraction, separate your model of your code.
+Data Model Abstraction, separate your model from your code.
 
 
-Data Model Update, supports authomatic data model merging between version.
+Data Model Update, supports automatic data model merging between versions.
 
 
 Support for Dependencies, between entities.
@@ -29,17 +29,22 @@ Support for Inheritances, between entities.
 Support for Relationships, between entities.
 
 
-Support for Encryption, encrypt the value of your database fields, based on a masterkey passphrase.
+Support for Encryption, encrypt the value of your selected database fields, based on a masterkey passphrase.
 
 
-Support for Backups, and restore your application database.
+Support for Backups, and restores of your application database.
 
 
-Support for Databinding, supports bidirectional databinding between UI and Entities.
+Support for Databinding, with bidirectional databinding between UI and Entities.
 
 
-Support for Data Validation, supports authomatic and customizable data validations.
+Support for Data Validation, automatic and customizable data validations.
 
+
+Support for Database Field Indexing for advanced high performance tunning.
+
+
+Support for Lazy Loading.
 
 
 Changelog
