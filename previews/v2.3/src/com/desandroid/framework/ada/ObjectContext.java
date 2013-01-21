@@ -911,9 +911,7 @@ public class ObjectContext {
 		Date returnedValue = new Date();
 		
 		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			returnedValue = dateFormat.parse(date);
-			
+			returnedValue = new SimpleDateFormat(DataUtils.DATE_TIME_FORMAT).parse(date);
 		} catch (Exception e) {
 			returnedValue = new Date();
 		}
@@ -930,9 +928,7 @@ public class ObjectContext {
 		String returedValue = "NULL";
 
 		if (date != null) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			returedValue = dateFormat.format(date);
-			
+			returedValue = new SimpleDateFormat(DataUtils.DATE_TIME_FORMAT).format(date);			
 			if (returedValue.trim().equals("")) {
 				returedValue = "NULL";
 			}

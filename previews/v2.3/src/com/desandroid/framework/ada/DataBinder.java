@@ -20,6 +20,7 @@
 package com.desandroid.framework.ada;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.desandroid.framework.ada.exceptions.AdaFrameworkException;
@@ -143,11 +144,21 @@ public class DataBinder {
 				} else {
 					if (pValue.getClass() == String.class) {
 						if (!((String)pValue).trim().equals("")) {
-							returnedValue = Date.parse((String)pValue);
+							try {
+								returnedValue = new SimpleDateFormat(DataUtils.DATE_FORMAT).parse((String)pValue);
+							} catch (Exception e) {
+								e.printStackTrace();
+								returnedValue = pValue;
+							}
 						}
 					} else {
 						if (!((String)pValue).trim().equals("")) {
-							returnedValue = Date.parse(pValue.toString());
+							try {
+								returnedValue = new SimpleDateFormat(DataUtils.DATE_FORMAT).parse(pValue.toString());
+							} catch (Exception e) {
+								e.printStackTrace();
+								returnedValue = pValue;
+							}
 						}
 					}
 				}

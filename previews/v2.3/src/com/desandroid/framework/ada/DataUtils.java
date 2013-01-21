@@ -54,6 +54,9 @@ final class DataUtils {
 	protected  static final String DATABASE_LIMIT_PATTERN = " %d";
 	protected  static final String DATABASE_LIMIT_OFFTSET_PATTERN = " %d,  %d";
 	
+	protected static final String DATE_FORMAT = "yyyy-MM-dd";
+	protected static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	
 	public static final String DEFAULT_DATABASE_NAME = "database.db";
 	public static final String DEFAULT_MASTER_ENCRIPTION_KEY = "com.desandroid.framework.ada";
 	public static final String DEFAULT_ENCRIPTION_ALGORITHM = "AES";

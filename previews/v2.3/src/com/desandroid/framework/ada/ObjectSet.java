@@ -454,7 +454,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			
 			if (debugable) {
 				String sQuery = "SELECT";
-				if (pDistinct) {
+				if (pDistinct != null && pDistinct) {
 					sQuery += " DISTINCT";
 				}
 				
