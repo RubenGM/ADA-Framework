@@ -461,8 +461,10 @@ public abstract class Entity {
 							}
 						}
 						
-						if (this.getStatus() == STATUS_NOTHING) {
-							this.setStatus(STATUS_UPDATED);
+						if (pDirection == DataBinder.BINDING_UI_TO_ENTITY) {
+							if (this.getStatus() == STATUS_NOTHING) {
+								this.setStatus(STATUS_UPDATED);
+							}
 						}
 					}
 				}
@@ -506,8 +508,10 @@ public abstract class Entity {
 							}
 						}
 						
-						if (this.getStatus() == STATUS_NOTHING) {
-							this.setStatus(STATUS_UPDATED);
+						if (pDirection == DataBinder.BINDING_UI_TO_ENTITY) {
+							if (this.getStatus() == STATUS_NOTHING) {
+								this.setStatus(STATUS_UPDATED);
+							}
 						}
 					}
 				}
