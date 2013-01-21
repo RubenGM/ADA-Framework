@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ADA Framework Basic Example</string>
+	<string name="buttonAddNew">Add New Employee</string>
+	<string name="buttonDelete">Delete</string>
+	<string name="buttonSave">Save</string>
+	<string name="buttonCancel">Cancel</string>
+	
+	<string name="labelName">* Name:</string>
+	<string name="labelSurname">* Surname:</string>
+	<string name="labelBirthday">Birthday:</string>
+	<string name="labelEmail">E-Mail:</string>
+	<string name="labelActive">Active:</string>
+	
+	<string name="messageEmployeeValidationErrorTitle">The next fields are not correct:</string>
+	<string name="messageEmployeeNameRequired">The Employee Name is required.</string>
+	<string name="messageEmployeeSurnameRequired">The Employee Surname is required.</string>
+</resources>
