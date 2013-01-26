@@ -50,6 +50,10 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.3
+
+   Added new annotations to configure a custom database table indexes.
+
 v 2.2 	
 
 	Added support to use Lazy Loading techniques.
