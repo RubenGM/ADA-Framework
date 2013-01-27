@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Base application theme, dependent on API level.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light" />
+    
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme" />
+
+</resources>

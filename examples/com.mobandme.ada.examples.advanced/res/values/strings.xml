@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ADA Framework Advance Example</string>
+	<string name="command_new_company">Create New Company</string>
+	<string name="command_new_worker">Create New Worker</string>
+	<string name="command_new_directive">Create New Directive</string>
+    
+	<string name="message_save_ok">Element saved.</string>
+	
+</resources>
