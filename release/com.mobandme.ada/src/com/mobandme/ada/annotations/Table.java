@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation to define information of the DataBase table.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 @Target(ElementType.TYPE)

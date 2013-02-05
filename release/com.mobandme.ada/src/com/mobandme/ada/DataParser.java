@@ -21,7 +21,7 @@ package com.mobandme.ada;
 
 /**
  * Data parser class.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 public class DataParser {

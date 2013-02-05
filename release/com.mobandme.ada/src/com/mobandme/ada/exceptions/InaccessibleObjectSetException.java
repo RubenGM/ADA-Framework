@@ -21,7 +21,7 @@ package com.mobandme.ada.exceptions;
 
 /**
  * InaccessibleObjectSetException exception.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 @SuppressWarnings("serial")

@@ -29,7 +29,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * This class encapsulate all logic of Database merging objects.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 class DatabaseMerger {

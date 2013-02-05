@@ -23,7 +23,7 @@ import com.mobandme.ada.ObjectSet;
 
 /***
  * Define the events fired by the ObjectSets.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 public interface ObjectSetEventsListener {

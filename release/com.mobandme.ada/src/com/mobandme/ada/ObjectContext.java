@@ -47,7 +47,7 @@ import com.mobandme.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Object Context for the DataBase Entities management.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 public class ObjectContext {
@@ -57,12 +57,25 @@ public class ObjectContext {
 	private Context context;
 	private String masterEncryptionKey = DataUtils.DEFAULT_MASTER_ENCRIPTION_KEY;
 	private ObjectSetEventsListener objectSetEventsListener;
-	
+	private boolean debugMode = false;
 	private boolean useTransactions = true;
 	private boolean generateTableIndexes = true;
 	private boolean useInsertHelppers = false;
 	private boolean useLazyLoading = false;
+	private List<String> createTableScriptsQueue;
+	private List<String> createIndexesScriptsQueue;
 	
+	/**
+	 * Enable or disable the debug mode of the library.
+	 * @param pEnabled
+	 */
+	public void enableDebugMode(boolean pEnabled) {
+		debugMode = pEnabled;
+	}
+	
+	boolean isOnDebugMode() {
+		return debugMode;
+	}
 	
 	/**
 	 * This method retrieve if the library uses LazyLoding technology.
@@ -564,8 +577,8 @@ public class ObjectContext {
 			
 			DatabaseMerger databaseMerger = new DatabaseMerger(pDataBase);
 			
-			List<String> createTableScriptsQueue   = new ArrayList<String>();
-			List<String> createIndexesScriptsQueue = new ArrayList<String>();
+			createTableScriptsQueue   = new ArrayList<String>();
+			createIndexesScriptsQueue = new ArrayList<String>();
 			
 			//Get all declared fields in the Object
 			Field[] declaredFields = this.getClass().getDeclaredFields();
@@ -647,6 +660,9 @@ public class ObjectContext {
 										}
 										
 										if (((ObjectSet<?>)objectSet).ContainInheritedEntities()) {
+											extractInheritedScripts(((ObjectSet<?>)objectSet).getInheritedObjectSets(), databaseMerger);
+											
+											/*
 											List<ObjectSet<Entity>> inheritedFields = ((ObjectSet<?>)objectSet).getInheritedObjectSets();
 											
 											for(ObjectSet<Entity> inheritedObjectSet : inheritedFields){
@@ -677,6 +693,7 @@ public class ObjectContext {
 													}
 												}
 											}
+											*/
 										}
 									}
 								} else {
@@ -720,6 +737,47 @@ public class ObjectContext {
 		Date endOfProcess = new Date();
 		String totalTime = DataUtils.calculateTimeDiference(initOfProcess, endOfProcess);
 		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to generate entities Data Model: %s.", totalTime));
+	}
+	
+	/**
+	 * This method extract all inherited scripts from the model definition.
+	 * @param pInheritedSets
+	 * @param pDatabaseMerger
+	 * @throws AdaFrameworkException
+	 */
+	private void extractInheritedScripts(List<ObjectSet<Entity>> pInheritedSets, DatabaseMerger pDatabaseMerger) throws AdaFrameworkException {
+		for(ObjectSet<Entity> inheritedObjectSet : pInheritedSets){
+			if (!inheritedObjectSet.isLinkedSet()) {
+				String[] tableScript = pDatabaseMerger.getDatatableScript(inheritedObjectSet);
+				if (tableScript != null && tableScript.length > 0) {
+					for(String script : tableScript) {
+						createTableScriptsQueue.add(script);
+					}
+				}
+				
+				if (generateTableIndexes) {
+					List<String> tableIndexScript = inheritedObjectSet.getDataBaseTableIndexes();
+					if (tableIndexScript != null) {
+						if (tableIndexScript.size() > 0) {
+							for(String indexScript : tableIndexScript) {
+								createIndexesScriptsQueue.add(indexScript);
+							}
+						}
+					}
+					
+					String[] customTableIndexScript = inheritedObjectSet.getDataBaseTableIndexScript();
+					if (customTableIndexScript != null && customTableIndexScript.length > 0) {
+						for(String indexScript : customTableIndexScript) {
+							createIndexesScriptsQueue.add(indexScript);
+						}
+					}
+				}
+				
+				if (inheritedObjectSet.ContainInheritedEntities()) {
+					extractInheritedScripts(inheritedObjectSet.getInheritedObjectSets(), pDatabaseMerger);
+				}
+			}	
+		}
 	}
 	
 	/***

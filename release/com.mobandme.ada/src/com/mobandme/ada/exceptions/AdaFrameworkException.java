@@ -21,7 +21,7 @@ package com.mobandme.ada.exceptions;
 
 /**
  * Framework generic exception.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 @SuppressWarnings("serial")

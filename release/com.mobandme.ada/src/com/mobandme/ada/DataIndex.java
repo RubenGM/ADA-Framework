@@ -21,7 +21,7 @@ package com.mobandme.ada;
 
 /**
  * Internal Entity fields Index Mapping class.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 class DataIndex {

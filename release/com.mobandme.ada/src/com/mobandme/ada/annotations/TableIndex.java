@@ -27,7 +27,7 @@ import com.mobandme.ada.Entity;
 
 /**
  * Annotation to configure DataBase table Indexes.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 

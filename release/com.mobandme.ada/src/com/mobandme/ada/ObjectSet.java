@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -52,7 +51,7 @@ import com.mobandme.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Entity ObjectSet.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 @SuppressWarnings("serial")
@@ -451,7 +450,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 */
 	private void logQuery(String pTotalTime, Boolean pDistinct, String pTableName, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, String pLimit) {
 		try {
-			boolean debugable = (0 != (getContext().getContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
+			boolean debugable = getContext().isOnDebugMode();
 			
 			if (debugable) {
 				String sQuery = "SELECT";
@@ -796,7 +795,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			Date endOfProcess = new Date();
 			String totalTime = DataUtils.calculateTimeDiference(initOfProcess, endOfProcess);
 			
-			logQuery(totalTime, pDistinct, this.dataBaseTableName, this.dataBaseTableFields,  whereFormat, whereValues, orderBy, groupBy, having, limit);
+			logQuery(totalTime, pDistinct, pTableName, pFields, whereFormat, whereValues, orderBy, groupBy, having, limit);
 			
 		} catch (Exception e) {
 			ExceptionsHelper.manageException(this, e);

@@ -29,7 +29,7 @@ import com.mobandme.ada.Entity;
 
 /**
  * Annotation to define DataBase table field information.
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

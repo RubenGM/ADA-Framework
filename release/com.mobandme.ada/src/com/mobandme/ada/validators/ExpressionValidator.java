@@ -27,7 +27,7 @@ import com.mobandme.ada.annotations.RegularExpressionValidation;
 
 /**
  * This class implement the logic of the Regular Expression Validations. 
- * @version 2.3
+ * @version 2.3.1
  * @author Mob&Me
  */
 public class ExpressionValidator extends Validator {
