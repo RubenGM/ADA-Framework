@@ -50,6 +50,10 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.3.1
+
+   Fixed model generation issue.
+   
 v2.3
 
    Added new annotations to configure a custom database table indexes.
