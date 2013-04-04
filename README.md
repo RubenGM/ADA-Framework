@@ -50,6 +50,21 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.4.2
+	
+	Added constants ACTION_CREATE and ACTION_UPDATE to ObjectContext.
+	Deprecated the event onPopulate(SQLiteDatabase pDatabase) of ObjectContext, now you have use onPopulate(SQLiteDatabase pDatabase, int pAction).
+	Added afterFill(), beforeFill() and isValidElement(T pEntity) events to ObjectSet.
+
+v2.4
+
+	Added two new fill methods with extra parameters.
+	Added a new data type named DATATYPE_DATE_BINARY, this new type, save the Date values into a numeric field into the Database.
+	Deprecated the old type named DATATYPE_DATE, because now, you can use the new date type named DATATYPE_DATE_BINARY.
+	Improved performance when using DATATYPE_ENTITY_LINK.
+	Solved the problem with the concurrents save processes.
+	Solved the problem between Entity classes and Gson library serialization.
+	
 v2.3.1
 
 	Fixed model generation issue.
