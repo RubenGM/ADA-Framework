@@ -42,7 +42,7 @@ import com.mobandme.ada.validators.Validator;
 
 /**
  * Represents the smallest unit to be implemented by the Entities.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public abstract class Entity {

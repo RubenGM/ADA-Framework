@@ -21,7 +21,7 @@ package com.mobandme.ada.validators;
 
 /**
  * This class represent the result of an individual validation process.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public final class ValidationResult {

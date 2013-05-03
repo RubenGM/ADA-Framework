@@ -25,7 +25,7 @@ import com.mobandme.ada.Entity;
 
 /**
  * This class implement the logic to validate the required fields validations. 
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public final class RequiredValidator extends Validator {

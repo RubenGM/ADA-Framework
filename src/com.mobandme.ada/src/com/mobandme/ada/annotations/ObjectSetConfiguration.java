@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation to define extended ObjectSet configuration.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 

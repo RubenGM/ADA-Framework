@@ -25,7 +25,7 @@ import com.mobandme.ada.Entity;
 
 /**
  * Base class for all validations.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public abstract class Validator {

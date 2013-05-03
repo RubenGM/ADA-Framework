@@ -25,7 +25,7 @@ import com.mobandme.ada.annotations.RangeValidation;
 
 /**
  * This class implement the logic of the Range Validations. 
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public class RangeValidator extends Validator {

@@ -26,7 +26,7 @@ import android.graphics.Bitmap.CompressFormat;
 
 /**
  * Internal Entity fields DataMapping class.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 class DataMapping {

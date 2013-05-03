@@ -51,7 +51,7 @@ import com.mobandme.ada.listeners.ObjectSetEventsListener;
 
 /**
  * Entity ObjectSet.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 @SuppressWarnings("serial")

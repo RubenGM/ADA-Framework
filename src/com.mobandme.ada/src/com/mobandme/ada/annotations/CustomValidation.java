@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation to define a Custom Validator.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

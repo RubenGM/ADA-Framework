@@ -29,7 +29,7 @@ import com.mobandme.ada.DataParser;
 
 /**
  * Annotation to define data binding between the Entity object and the UI View control.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

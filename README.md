@@ -50,6 +50,10 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.4.3
+	
+	Fixed problems with null values and the encrypted fields. 
+	
 v2.4.2
 	
 	Added constants ACTION_CREATE and ACTION_UPDATE to ObjectContext.

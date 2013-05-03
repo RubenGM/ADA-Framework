@@ -28,7 +28,7 @@ import com.mobandme.ada.validators.ExpressionValidator;
 
 /**
  * Annotation to define Required Field Validation.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 @Target(ElementType.FIELD)

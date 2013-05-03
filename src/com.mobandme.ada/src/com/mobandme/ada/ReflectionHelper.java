@@ -34,7 +34,7 @@ import com.mobandme.ada.exceptions.AdaFrameworkException;
 
 /**
  * Entity ObjectSet.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 class ReflectionHelper {

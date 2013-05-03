@@ -30,7 +30,7 @@ import com.mobandme.ada.exceptions.AdaFrameworkException;
 
 /**
  * Helper class to manage encryption processes. 
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  *
  */
@@ -47,9 +47,15 @@ final class EncryptionHelper {
 	
 	public static String encrypt(String masterEncryptionKey, String cleartext) throws AdaFrameworkException {
 		try {
-			byte[] rawKey = getRawKey(masterEncryptionKey.getBytes());
-	        byte[] result = encrypt(rawKey, cleartext.getBytes());
-	        return toHex(result);
+			
+			if (cleartext != null && !cleartext.trim().equals("")) {
+				byte[] rawKey = getRawKey(masterEncryptionKey.getBytes());
+		        byte[] result = encrypt(rawKey, cleartext.getBytes());
+		        return toHex(result);
+			} else {
+				return cleartext;
+			}
+			
 		} catch (Exception e) {
 			throw new AdaFrameworkException(e);
 		}
@@ -57,11 +63,16 @@ final class EncryptionHelper {
 	
 	public static String decrypt(String masterEncryptionKey, String encrypted) throws AdaFrameworkException {
 		try {
-	        byte[] rawKey = getRawKey(masterEncryptionKey.getBytes());
-	        byte[] enc = toByte(encrypted);
-	        byte[] result = decrypt(rawKey, enc);
-	        
-	        return new String(result);
+			
+			if (encrypted != null && !encrypted.trim().equals("")) {
+		        byte[] rawKey = getRawKey(masterEncryptionKey.getBytes());
+		        byte[] enc = toByte(encrypted);
+		        byte[] result = decrypt(rawKey, enc);
+		        
+		        return new String(result);
+			} else {
+				return encrypted;
+			}
 	        
 		} catch (Exception e) {
 			throw new AdaFrameworkException(e);

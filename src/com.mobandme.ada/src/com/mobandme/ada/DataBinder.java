@@ -44,7 +44,7 @@ import android.widget.ToggleButton;
 /**
  * Class dedicated to binding data between the Entities and the User Interface.
  * Extend of this class to make your custom DataBinders.
- * @version 2.4.2
+ * @version 2.4.3
  * @author Mob&Me
  */
 public class DataBinder {
