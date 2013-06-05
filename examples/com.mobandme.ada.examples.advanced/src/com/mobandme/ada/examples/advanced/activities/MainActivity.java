@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.app.Activity;
 
-import com.desandroid.framework.ada.exceptions.AdaFrameworkException;
+import com.mobandme.ada.exceptions.AdaFrameworkException;
 import com.mobandme.ada.examples.advanced.R;
 import com.mobandme.ada.examples.advanced.helpers.ExceptionsHelper;
 import com.mobandme.ada.examples.advanced.model.DataBase;
