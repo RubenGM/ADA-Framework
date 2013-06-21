@@ -75,9 +75,19 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	private boolean dataBaseUseIndexes = DataUtils.DATABASE_USE_INDEXES;
 	private boolean containsLinkedEntities = false;
 	private boolean isLinkedSet = false;
+	private boolean notifyAdapterChanges = true;
 	
 	public boolean isLinkedSet() { return isLinkedSet; }
 	public void setLinkedSet(boolean isLinkedSet) { this.isLinkedSet = isLinkedSet; }
+	
+	public void enableAdapterNotifications() {
+		notifyAdapterChanges = true;
+		notifyDataSetChanged();
+	}
+	
+	public void disableAdapterNotifications() {
+		notifyAdapterChanges = false;
+	}
 	
 	/**
 	 * This method retrieve if the ObjectSet contains relations with Linked Tables.
@@ -2579,8 +2589,10 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	private void notifyDataSetChanged() {
 		try {
 			
-			if (this.dataAdapter != null) {
-				dataAdapter.notifyDataSetChanged();					
+			if (notifyAdapterChanges) {
+				if (this.dataAdapter != null) {
+					dataAdapter.notifyDataSetChanged();					
+				}
 			}
 			
 		} catch (Exception e) {

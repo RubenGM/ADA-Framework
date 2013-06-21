@@ -19,6 +19,8 @@
 
 package com.mobandme.ada.validators;
 
+import java.lang.reflect.Field;
+
 /**
  * This class represent the result of an individual validation process.
  * @version 2.4.3
@@ -26,23 +28,16 @@ package com.mobandme.ada.validators;
  */
 public final class ValidationResult {
 	
-	private Boolean isOK = false;
-	private String message = "";
+	private Boolean    isOK = false;
+	private String     message = "";
+	private Field      field;
 	
+	public Field getField() { return field; }
+	public void setField(Field pField) { field = pField; }
 	
-	public Boolean IsOK() {
-		return this.isOK;
-	}
-	
-	public void IsOK(Boolean pValue) {
-		this.isOK = pValue;
-	}
+	public Boolean IsOK() { return this.isOK; }
+	public void IsOK(Boolean pValue) { this.isOK = pValue; }
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
+	public String getMessage() { return message; }
+	public void setMessage(String message) { this.message = message; }
 }

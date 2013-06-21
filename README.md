@@ -50,6 +50,10 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.4.4
+	
+	Added methods to enable and disable ObjsetSet Adapter notifications. 
+	
 v2.4.3
 	
 	Fixed problems with null values and the encrypted fields. 
