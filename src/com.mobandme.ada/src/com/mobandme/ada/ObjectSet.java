@@ -81,8 +81,22 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	public void setLinkedSet(boolean isLinkedSet) { this.isLinkedSet = isLinkedSet; }
 	
 	public void enableAdapterNotifications() {
+		enableAdapterNotifications(true);
+	}
+	
+	public void enableAdapterNotifications(boolean pForceUpdate) {
 		notifyAdapterChanges = true;
-		notifyDataSetChanged();
+		
+		if (pForceUpdate) {
+			if (isContextActivity()) {
+				((Activity)this.dataContext.getContext()).runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						notifyDataSetChanged();
+					}
+				});
+			}
+		}
 	}
 	
 	public void disableAdapterNotifications() {
