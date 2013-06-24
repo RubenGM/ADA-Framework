@@ -575,6 +575,7 @@ public abstract class Entity {
 										
 										validationR.IsOK(false);
 										validationR.setMessage(validation.message);
+										validationR.setField(validation.EntityField);
 										//this.validationResult.add(validationR);
 										this.validationResult.add(0, validationR);
 									}
