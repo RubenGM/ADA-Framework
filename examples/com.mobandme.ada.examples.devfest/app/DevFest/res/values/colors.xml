@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+    <color name="fragment_back_color">#DBDBDB</color>
+    
+    <color name="dark_color">#474747</color>
+    <color name="light_color">#00BFFF</color>
+    <color name="active_color">#0099CC</color>
+    <color name="neutral_color">#6E6E6E</color>
+</resources>

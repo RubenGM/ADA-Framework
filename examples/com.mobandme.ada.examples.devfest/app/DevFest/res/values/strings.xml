@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DevFest</string>
+    
+    
+    <string name="hint_search">Search</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_biography">Biography</string>
+    
+    <string name="empty">No employees yet.</string>
+    <string name="field_name">Name:</string>
+    <string name="field_birthday">Birthday:</string>
+    <string name="field_email">Email:</string>
+    <string name="field_dummy">Dummy Text</string>
+    
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+    <string name="message_delete_confirm">Are you sure?</string>
+    
+    <string name="requires_field_name">The Name field is required.</string>
+    <string name="requires_field_biography">The Biography field is required.</string>
+    
+    <string name="menu_title_accept">Accept Employee</string>
+    <string name="menu_title_accept_condensed">Accept</string>
+    <string name="menu_title_edit">Edit Employee</string>
+    <string name="menu_title_edit_condensed">Edit</string>
+    <string name="menu_title_discard">Discard Employee</string>
+    <string name="menu_title_discard_condensed">Discard</string>
+    <string name="menu_title_search">Search Employee</string>
+    <string name="menu_title_search_condensed">Search</string>
+    <string name="menu_title_add">Add Employee</string>
+    <string name="menu_title_add_condensed">Add</string>
+
+</resources>

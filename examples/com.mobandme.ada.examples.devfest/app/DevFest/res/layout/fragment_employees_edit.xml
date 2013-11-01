@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_margin"
+    android:scrollbars="vertical">
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        
+	        <com.mobandme.ada.examples.devfest.ui.views.RoundImageView
+		        style="@style/employee_big_picture"
+		        android:id="@+id/Employee:Image" />
+	   		
+	   		<EditText 
+		        style="@style/form_field"
+		        android:layout_marginLeft="@dimen/default_margin"
+		        android:textSize="@dimen/text_size_small"
+		        android:id="@+id/Employee:Biography"
+		        android:hint="@string/hint_biography" />
+	        
+	    </LinearLayout>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:layout_marginTop="@dimen/default_margin"
+	        android:layout_marginBottom="@dimen/default_margin"
+	        android:background="@color/active_color" />
+	    
+   		<EditText 
+	        style="@style/form_field"
+	        android:id="@+id/Employee:Name"
+	        android:inputType="textCapWords"
+	        android:maxLines="1"
+	        android:hint="@string/hint_name"/>
+	        
+   		<LinearLayout android:layout_width="match_parent"
+   		    android:layout_height="wrap_content"
+   		    android:orientation="horizontal"
+   		    android:gravity="left|center_vertical">
+	   		
+	   		<EditText 
+		        style="@style/form_field"
+		        android:id="@+id/Employee:Birthday"
+		        android:layout_weight="1"
+		        android:layout_width="0dp"
+		        android:inputType="textCapWords"
+		        android:maxLines="1"
+		        android:hint="@string/hint_birthday" />
+	   		
+	   		<ImageButton 
+	   		    android:id="@+id/Employee:DatePicker"
+	   		    android:layout_width="wrap_content"
+	   		    android:layout_height="wrap_content"
+	   		    android:contentDescription="@string/app_name"
+	   		    android:scaleType="fitXY"
+	   		    android:background="@android:color/transparent"
+	   		    android:src="@drawable/ic_action_event" />
+   		</LinearLayout>
+    </LinearLayout>
+</ScrollView>

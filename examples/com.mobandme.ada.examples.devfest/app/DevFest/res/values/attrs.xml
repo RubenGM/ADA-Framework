@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Label">
+	    <attr name="vertical"  format="reference|boolean" />
+		<attr name="fontName"  format="string" />
+		<attr name="android:textStyle" />
+	</declare-styleable> 
+	
+	<declare-styleable name="RoundImageView">
+		<attr name="strokeWidth"       format="reference|dimension" />
+		<attr name="strokeShadowWidth" format="reference|dimension" />
+		<attr name="strokeColor"       format="reference|color" />
+		<attr name="strokeShadowColor" format="reference|color" />
+		<attr name="cornerRadious" format="reference|dimension" />
+		<attr name="maskShape" format="enum">
+	    	<enum name="round" value="1" />
+	    	<enum name="hexagon" value="2" />
+	    	<enum name="octogon" value="4" />
+	    	<enum name="round_rect" value="3" />
+	    	<enum name="gone" value="0" />
+	    </attr>
+	</declare-styleable>    
+</resources>

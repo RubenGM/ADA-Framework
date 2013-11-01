@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   	xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="@dimen/default_margin"
+	    android:layout_marginRight="@dimen/default_margin"
+	    android:padding="@dimen/default_margin"
+	    android:orientation="horizontal"
+	    android:gravity="left|center_vertical"
+	    android:background="@drawable/card">
+	    
+	    <com.mobandme.ada.examples.devfest.ui.views.RoundImageView
+	        style="@style/employee_small_picture"
+	        android:id="@+id/Employee:Image" />
+	    
+	    <LinearLayout 
+	        android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/default_margin"
+	        android:orientation="vertical">
+	        
+		    <com.mobandme.ada.examples.devfest.ui.views.Label 
+		        style="@style/card_title" 
+		        android:id="@+id/Employee:Name" />
+		    
+		    <com.mobandme.ada.examples.devfest.ui.views.Label
+		        style="@style/card_description"
+		        android:id="@+id/Employee:Biography" />
+		    
+	    </LinearLayout>
+	</LinearLayout>
+</FrameLayout>

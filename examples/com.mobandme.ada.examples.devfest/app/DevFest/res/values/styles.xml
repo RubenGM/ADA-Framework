@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light" />
+    
+    <style name="AppTheme" parent="AppBaseTheme" />
+    
+    <style name="empty">
+    	<item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/neutral_color</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="fontName">roboto_thin</item>
+        <item name="android:text">@string/empty</item>
+    </style>
+    
+    <style name="employee_picture">
+    	<item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/face01</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/light_color</item>
+        <item name="strokeShadowWidth">2dp</item>
+        <item name="strokeShadowColor">@color/dark_color</item>
+    </style>
+    
+    <style name="employee_small_picture" parent="employee_picture">
+        <item name="android:layout_width">@dimen/image_size_list</item>
+        <item name="android:layout_height">@dimen/image_size_list</item>
+    </style>
+    
+    <style name="employee_big_picture" parent="employee_picture">
+        <item name="android:layout_width">@dimen/image_size_detail</item>
+        <item name="android:layout_height">@dimen/image_size_detail</item>
+    </style>
+    
+    <style name="title">
+	    <item name="android:layout_width">wrap_content</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textSize">@dimen/text_size_medium</item>
+	    <item name="android:textColor">@color/active_color</item>
+	    <item name="fontName">roboto_light</item>
+	    <item name="android:maxLines">1</item>
+    </style>
+    
+    <style name="description">
+	    <item name="android:layout_width">wrap_content</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textSize">@dimen/text_size_small</item>
+	    <item name="android:textColor">@color/dark_color</item>
+	    <item name="fontName">roboto_light</item>
+    </style>
+    
+    <style name="field">
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textSize">@dimen/text_size_medium</item>
+	    <item name="fontName">roboto_light</item>
+    </style>
+    
+    <style name="form_title" parent="field">
+        <item name="android:layout_weight">1</item>
+	    <item name="android:layout_width">0dp</item>
+        <item name="android:textColor">@color/dark_color</item>
+        <item name="fontName">roboto_medium</item>
+	    <item name="android:text">Employee Name</item>
+    </style>
+    
+    <style name="form_value" parent="field">
+        <item name="android:layout_weight">3</item>
+	    <item name="android:layout_width">0dp</item>
+        <item name="android:textColor">@color/active_color</item>
+        <item name="fontName">roboto_thin</item>
+    </style>
+    
+    <style name="form_field" parent="field">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_marginBottom">@dimen/default_margin</item>
+        <item name="android:textColor">@color/active_color</item>
+    </style>
+    
+    <style name="card_title" parent="title">
+	    <item name="android:textSize">@dimen/text_size_medium</item>
+	    <item name="android:text">Employee Name</item>
+    </style>
+	
+    <style name="card_description" parent="description">
+	    <item name="android:maxLines">4</item>
+	    <item name="android:text">Employee Description</item>
+    </style>
+    	        
+</resources>
