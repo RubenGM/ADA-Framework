@@ -50,6 +50,10 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.4.5
+	
+	Added custom logger with debugMode
+
 v2.4.4
 	
 	Added methods to enable and disable ObjsetSet Adapter notifications. 
