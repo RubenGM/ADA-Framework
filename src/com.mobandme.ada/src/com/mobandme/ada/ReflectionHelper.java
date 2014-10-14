@@ -211,7 +211,7 @@ class ReflectionHelper {
 			}
 			
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e);
+			ExceptionsHelper.manageAndThrowException(e);
 		}
 		
 		return returnedValue;

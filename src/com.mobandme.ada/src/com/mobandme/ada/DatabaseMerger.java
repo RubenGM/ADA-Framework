@@ -104,7 +104,7 @@ class DatabaseMerger {
 			}
 			
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e);
+			ExceptionsHelper.manageAndThrowException(e);
 		} 
 		
 		return returnedValue;
@@ -147,7 +147,7 @@ class DatabaseMerger {
 			}
 
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e);
+			ExceptionsHelper.manageAndThrowException(e);
 		} finally {
 			scriptsList.clear();
 			scriptsList = null;

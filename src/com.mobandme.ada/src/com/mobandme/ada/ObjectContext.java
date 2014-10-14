@@ -37,7 +37,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.mobandme.ada.annotations.ObjectSetConfiguration;
 import com.mobandme.ada.exceptions.AdaFrameworkException;
@@ -74,6 +73,7 @@ public class ObjectContext {
 	 */
 	public void enableDebugMode(boolean pEnabled) {
 		debugMode = pEnabled;
+		ADALog.enableDebugMode(debugMode);
 	}
 	
 	boolean isOnDebugMode() {
@@ -143,7 +143,7 @@ public class ObjectContext {
 	 * @param useTransactions
 	 */
 	public void setUseTransactions(Boolean pUseTransactions) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Transactions: %s", pUseTransactions.toString()));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Transactions: %s", pUseTransactions.toString()));
 		this.useTransactions = pUseTransactions;
 	}
 	
@@ -152,7 +152,7 @@ public class ObjectContext {
 	 * @param pGenerateIndexes
 	 */
 	public void setUseTableIndexes(Boolean pGenerateIndexes) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Table Indexes: %s", pGenerateIndexes.toString()));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Table Indexes: %s", pGenerateIndexes.toString()));
 		this.generateTableIndexes = pGenerateIndexes;
 	}
 	
@@ -169,7 +169,7 @@ public class ObjectContext {
 	 * @param useTransactions
 	 */
 	public void setUseInsertHelpers(Boolean pUseInsertHelpers) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Insert Helpers: %s", pUseInsertHelpers.toString()));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Insert Helpers: %s", pUseInsertHelpers.toString()));
 		this.useInsertHelppers = pUseInsertHelpers;
 	}
 	
@@ -285,7 +285,7 @@ public class ObjectContext {
 			this.context.getApplicationContext().getDatabasePath(this.databaseFileName).delete();
 			
 		} catch (Exception e) {
-			Log.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
+			ADALog.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
 			returnedValue = false;
 		}
 		
@@ -346,12 +346,12 @@ public class ObjectContext {
 		        
 				returnedValue = true;
 			} else {
-				Log.d(DataUtils.DEFAULT_LOGS_TAG, "DataBase file does not exist.");
+				ADALog.d(DataUtils.DEFAULT_LOGS_TAG, "DataBase file does not exist.");
 				returnedValue = false;
 			}
 			
 		} catch (Exception e) {
-			Log.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
+			ADALog.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
 			returnedValue = false;
 		}
 		
@@ -480,11 +480,11 @@ public class ObjectContext {
 				returnedValue = true;
 			} else {
 				returnedValue = false;
-				Log.d(DataUtils.DEFAULT_LOGS_TAG, "BackUp file does not exist.");
+				ADALog.d(DataUtils.DEFAULT_LOGS_TAG, "BackUp file does not exist.");
 			}
 			
 		} catch (Exception e) {
-			Log.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
+			ADALog.e(DataUtils.DEFAULT_LOGS_TAG, e.getMessage());
 			returnedValue = false;
 		}
 		
@@ -714,7 +714,7 @@ public class ObjectContext {
 		
 		Date endOfProcess = new Date();
 		String totalTime = DataUtils.calculateTimeDiference(initOfProcess, endOfProcess);
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to generate entities Data Model: %s.", totalTime));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to generate entities Data Model: %s.", totalTime));
 	}
 	
 	/**
@@ -768,8 +768,8 @@ public class ObjectContext {
 	 */
 	private void generateTable(SQLiteDatabase pDataBase, String pTableName, String pTableScript, int pAction) throws AdaFrameworkException {
 		try{
-			
-			Log.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableScript);
+
+			ADALog.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableScript);
 			pDataBase.execSQL(pTableScript);
 			
 		} catch (Exception e) {
@@ -789,7 +789,7 @@ public class ObjectContext {
 		try{
 			
 			if (createTable) {
-				Log.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableIndexScript);
+				ADALog.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableIndexScript);
 				pDataBase.execSQL(pTableIndexScript);
 			}
 			
@@ -803,7 +803,7 @@ public class ObjectContext {
 	 * @return Readable DataBase instance.
 	 */
 	protected final SQLiteDatabase getReadableDatabase() {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, "Getting Readable Database.");
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, "Getting Readable Database.");
 		return this.databaseHelper.getReadableDatabase();
 	}
 
@@ -812,7 +812,7 @@ public class ObjectContext {
 	 * @return Writable DataBase instance.
 	 */
 	protected final SQLiteDatabase getWritableDatabase() {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, "Getting Writable Database.");
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, "Getting Writable Database.");
 		return this.databaseHelper.getWritableDatabase();
 	}
 	
@@ -843,7 +843,7 @@ public class ObjectContext {
 	 * @return
 	 */
 	protected  Long executeInsert(SQLiteDatabase pDatabase, String pTable, String pNullColumnHack, ContentValues pValues) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("INSERT INTO TABLE %s", pTable));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("INSERT INTO TABLE %s", pTable));
 		return pDatabase.insert(pTable, pNullColumnHack, pValues);
 	}
 	
@@ -857,7 +857,7 @@ public class ObjectContext {
 	 * @return
 	 */
 	protected Integer executeUpdate(SQLiteDatabase pDatabase, String pTable, ContentValues pValues, String pWhereClause, String[] pWhereArgs) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("UPDATE ON TABLE %s", pTable));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("UPDATE ON TABLE %s", pTable));
 		return pDatabase.update(pTable, pValues, pWhereClause, pWhereArgs);
 	}
 	
@@ -870,7 +870,7 @@ public class ObjectContext {
 	 * @return
 	 */
 	protected Integer executeDelete(SQLiteDatabase pDatabase, String pTable, String pWhereClause, String[] pWhereArgs) {
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("DELETE FROM TABLE %s", pTable));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("DELETE FROM TABLE %s", pTable));
 		return pDatabase.delete(pTable, pWhereClause, pWhereArgs);
 	}
 	
