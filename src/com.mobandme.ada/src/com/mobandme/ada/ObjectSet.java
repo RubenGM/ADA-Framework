@@ -533,7 +533,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				}
 				if (pWhereValues != null) {
 					if (pWhereValues.length > 0){
-						sQuery = String.format(sQuery.replace("?", "%s"), (Object)pWhereValues);
+						sQuery = String.format(sQuery.replace("?", "%s"), pWhereValues);
 					}
 				}
 				
