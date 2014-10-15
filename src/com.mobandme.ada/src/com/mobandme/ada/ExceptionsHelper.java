@@ -21,7 +21,6 @@ package com.mobandme.ada;
 
 import com.mobandme.ada.exceptions.AdaFrameworkException;
 import android.app.Activity;
-import android.util.Log;
 
 /**
  * The class encapsulate the exceptions management.
@@ -36,7 +35,7 @@ class ExceptionsHelper {
 	 */
 	public static void manageException(final ObjectSet<?> pObjcetSet, final Exception pException) throws AdaFrameworkException {
 		pException.printStackTrace();
-		manageException(pException.toString());
+		manageException(pException);
 		
 		if (pObjcetSet != null) {
 			if (pObjcetSet.getObjectSetEventsListener() != null) {
@@ -65,11 +64,10 @@ class ExceptionsHelper {
 	
 	/**
 	 * Manage the framework exceptions.
-	 * @param pException
-	 * @throws Exception
+	 * @param exception
 	 */
-	public static void manageException(String pException) {
-		Log.e(DataUtils.DEFAULT_LOGS_TAG, pException.toString());
+	public static void manageException(Exception exception) {
+		ADALog.e(DataUtils.DEFAULT_LOGS_TAG, exception.getMessage(), exception);
 	}
 	
 	/**
@@ -77,8 +75,8 @@ class ExceptionsHelper {
 	 * @param pException
 	 * @throws Exception
 	 */
-	public static void manageException(Exception pException) throws AdaFrameworkException {
-		manageException(pException.getMessage());
+	public static void manageAndThrowException(Exception pException) throws AdaFrameworkException {
+		manageException(pException);
 		throw new AdaFrameworkException(pException);
 	}
 }

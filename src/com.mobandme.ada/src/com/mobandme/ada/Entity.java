@@ -580,7 +580,7 @@ public abstract class Entity {
 										this.validationResult.add(0, validationR);
 									}
 								} else {
-									ExceptionsHelper.manageException(new AdaFrameworkException(String.format("The validator %s does not extend of Validator.class", validation.Validator.getName())));
+									ExceptionsHelper.manageAndThrowException(new AdaFrameworkException(String.format("The validator %s does not extend of Validator.class", validation.Validator.getName())));
 								}
 							}
 						}
@@ -589,7 +589,7 @@ public abstract class Entity {
 			}
 			
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e);
+			ExceptionsHelper.manageAndThrowException(e);
 		}
 		
 		return returnedValue;

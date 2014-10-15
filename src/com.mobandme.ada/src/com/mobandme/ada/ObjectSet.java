@@ -37,7 +37,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
 import android.location.Location;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import com.mobandme.ada.annotations.Table;
 import com.mobandme.ada.annotations.TableField;
@@ -534,7 +533,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				}
 				if (pWhereValues != null) {
 					if (pWhereValues.length > 0){
-						sQuery = String.format(sQuery.replace("?", "%s"), (Object)pWhereValues);
+						sQuery = String.format(sQuery.replace("?", "%s"), pWhereValues);
 					}
 				}
 				
@@ -544,11 +543,11 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				if (pLimit != null) {
 					sQuery += " LIMIT " + pLimit;
 				}
-				
-				Log.d(DataUtils.DEFAULT_LOGS_TAG, pTotalTime + ": " + sQuery);
+
+				ADALog.d(DataUtils.DEFAULT_LOGS_TAG, pTotalTime + ": " + sQuery);
 			}
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e.toString());
+			ExceptionsHelper.manageException(e);
 		}
 	}
 	
@@ -1051,8 +1050,8 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 		
 		Date endOfProcess = new Date();
 		String totalTime = DataUtils.calculateTimeDiference(initOfProcess, endOfProcess);
-		
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to execute Save '%s' command: %s.", this.managedType.getSimpleName(), totalTime));
+
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to execute Save '%s' command: %s.", this.managedType.getSimpleName(), totalTime));
 	}
 	
 	/**
@@ -1220,7 +1219,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 		
 		Date endOfProcess = new Date();
 		String totalTime = DataUtils.calculateTimeDiference(initOfProcess, endOfProcess);
-		Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to execute Save '%s' command: %s.", this.managedType.getSimpleName(), totalTime));
+		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("TOTAL Time to execute Save '%s' command: %s.", this.managedType.getSimpleName(), totalTime));
 	}
 	
 	/**
@@ -1664,7 +1663,9 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	
 	/**
 	 * Generate new ObjectSet instance for any the Inherited Entities.
-	 * @param managedType
+	 * @param pOwnerSet
+	 * @param pMapping
+	 * @param pLinked
 	 * @throws AdaFrameworkException
 	 */
 	private ObjectSet<Entity> generateNewInheritedObjectSet(ObjectSet<Entity> pOwnerSet, DataMapping pMapping, Boolean pLinked) throws AdaFrameworkException {
@@ -1750,7 +1751,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 		
 		for(DataMapping mapping : pDataMappings) {
 			if (mapping.virtual) {
-				Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
+				ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
 			} else {
 				if ((mapping.DataBaseDataType != Entity.DATATYPE_ENTITY)) {
 					
@@ -1893,7 +1894,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 					
 					if (mapping.ForeignKey) {	
 						if (mapping.virtual) {
-							Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
+							ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
 						} else {
 							String indexName = 	String.format(DataUtils.DATABASE_INDEX_FIELD_PATTERN, tableName, dataFieldName);
 							String createIndexScript = String.format(DataUtils.DATABASE_TABLE_INDEX_PATTERN, indexName, tableName, dataFieldName);
@@ -1910,7 +1911,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 
 	/**
 	 * This method retrieve and generate the linked values.
-	 * @param database
+	 * @param pDatabase
 	 * @param pMapping
 	 * @param pEntity
 	 * @throws AdaFrameworkException
@@ -2295,7 +2296,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 		try {
 			for (DataMapping mapping : this.dataMappings) {
 				if (mapping.virtual) {
-					Log.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
+					ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("The field '%s' has been omitted its virtual condition.", mapping.EntityFieldName));
 				} else {
 					//Skip Entities and Entities Collection because this objects don't allow storage in the object table.
 					if (mapping.DataBaseDataType != Entity.DATATYPE_ENTITY && mapping.DataBaseDataType != Entity.DATATYPE_ENTITY_LINK) {
@@ -2497,7 +2498,6 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	 * Save linked entities.
 	 * @param pDatabase
 	 * @param pEntity
-	 * @param pOwnerID
 	 * @throws InaccessibleFieldException 
 	 */
 	@SuppressWarnings("unchecked")
@@ -2622,8 +2622,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			returnedValue = this.get(null, index);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e(DataUtils.DEFAULT_LOGS_TAG, e.toString());
+			ADALog.e(DataUtils.DEFAULT_LOGS_TAG, e.toString(), e);
 		}
 		
 		return returnedValue;
@@ -2648,7 +2647,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 			}
 		
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e);
+			ExceptionsHelper.manageAndThrowException(e);
 		}
 		
 		return entity;

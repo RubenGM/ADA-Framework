@@ -58,7 +58,7 @@ class DataBaseHelper extends SQLiteOpenHelper {
 			getContext().onPopulate(pDataBase, ObjectContext.ACTION_CREATE);
 			
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e.toString());
+			ExceptionsHelper.manageException(e);
 			getContext().onError(e);
 		}
 	}
@@ -78,7 +78,7 @@ class DataBaseHelper extends SQLiteOpenHelper {
 			getContext().onPopulate(pDataBase, ObjectContext.ACTION_UPDATE);
 			
 		} catch (Exception e) {
-			ExceptionsHelper.manageException(e.toString());
+			ExceptionsHelper.manageException(e);
 			getContext().onError(e);
 		}
 	}
