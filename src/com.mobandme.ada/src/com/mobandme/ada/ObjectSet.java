@@ -819,7 +819,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 	
 	@SuppressWarnings("unchecked")
 	List<T> searchList(SQLiteDatabase pDataBase, String pTableName, Boolean pDistinct, String[] pFields, String pWherePattern, String[] pWhereValues, String pOrderBy, String pGroupBy, String pHaving, Integer pOffset, Integer pLimit) throws AdaFrameworkException {
-		List<T> returnedValue = null;
+		List<T> returnedValue = new ArrayList<T>();
 		Date initOfProcess = new Date();
 		Boolean manageDatabase = false;
 		SQLiteDatabase database = pDataBase;
@@ -858,12 +858,7 @@ public class ObjectSet<T extends Entity> extends ArrayList<T> implements List<T>
 				entitiesCursor = getContext().executeQuery(database, distinct, pTableName, pFields, whereFormat, whereValues, groupBy, having, orderBy, limit);
 				
 				if (entitiesCursor != null) {
-					entitiesCursor.moveToLast();
-					entitiesCursor.moveToFirst();
-					
-					int numberOfElements = entitiesCursor.getCount();
-					if (numberOfElements > 0) {
-						returnedValue = new ArrayList<T>();
+					if (entitiesCursor.moveToFirst()) {
 						
 						do{
 							Entity entity = generateNewEntity(database, entitiesCursor, null);
