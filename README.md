@@ -50,6 +50,9 @@ Support for Lazy Loading.
 Changelog
 =========
 
+v2.4.6
+	Method ObjectSet.search(...) return always an object list instead of a null value. 
+
 v2.4.5
 	
 	Added custom logger with debugMode
