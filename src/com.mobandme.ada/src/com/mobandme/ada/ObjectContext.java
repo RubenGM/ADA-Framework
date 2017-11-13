@@ -19,19 +19,7 @@
 
 package com.mobandme.ada;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -44,11 +32,29 @@ import com.mobandme.ada.exceptions.InaccessibleObjectSetException;
 import com.mobandme.ada.exceptions.ModelGenerationException;
 import com.mobandme.ada.listeners.ObjectSetEventsListener;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static android.text.TextUtils.isEmpty;
+
 /**
  * Object Context for the DataBase Entities management.
  * @version 2.4.3
  * @author Mob&Me
  */
+@SuppressWarnings({"JavaDoc", "WeakerAccess", "unused", "ResultOfMethodCallIgnored"})
 public class ObjectContext {
 	private DataBaseHelper databaseHelper;
 	private String databaseFileName = DataUtils.DEFAULT_DATABASE_NAME;
@@ -140,7 +146,7 @@ public class ObjectContext {
 	}
 	/**
 	 * Define if the DataBase  operations uses transactions or not.
-	 * @param useTransactions
+	 * @param pUseTransactions
 	 */
 	public void setUseTransactions(Boolean pUseTransactions) {
 		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Transactions: %s", pUseTransactions.toString()));
@@ -166,7 +172,7 @@ public class ObjectContext {
 	
 	/**
 	 * Define if the Insert Process uses InsertHelper interface.
-	 * @param useTransactions
+	 * @param pUseInsertHelpers
 	 */
 	public void setUseInsertHelpers(Boolean pUseInsertHelpers) {
 		ADALog.d(DataUtils.DEFAULT_LOGS_TAG, String.format("Use Insert Helpers: %s", pUseInsertHelpers.toString()));
@@ -202,7 +208,7 @@ public class ObjectContext {
 	}
 	/**
 	 * Set the Database file name.
-	 * @param pDatabaseFileName
+	 * @param pDatabaseName
 	 */
 	private void setDatabaseFileName(String pDatabaseName) {
 		this.databaseFileName = pDatabaseName;
@@ -215,9 +221,6 @@ public class ObjectContext {
 		return databaseVersion;
 	}
 
-	/** 
-	 * @return DataBase Helper instance.
-	 */
 	/*
 	private DataBaseHelper getHelper() {
 		return this.databaseHelper;
@@ -226,7 +229,7 @@ public class ObjectContext {
 	
 	/**
 	 * Default constructor of the class.
-	 * @param pDatabaseName
+	 * @param pContext
 	 */
 	public ObjectContext(Context pContext) {  
 		setContext(pContext);
@@ -238,13 +241,12 @@ public class ObjectContext {
 	/**
 	 * Secondary constructor of the class.
 	 * @param pDatabaseName
-	 * @throws ArgumentRequiredException 
 	 */
 	public ObjectContext(Context pContext, String pDatabaseName) {
 		setContext(pContext);
 		
 		if (pDatabaseName != null) {
-			if (pDatabaseName.trim() != "") {
+			if (!isEmpty(pDatabaseName.trim())) {
 				setDatabaseFileName(pDatabaseName);
 				
 				this.databaseVersion = getCodeVersion();
@@ -263,7 +265,7 @@ public class ObjectContext {
 		setContext(pContext);
 		
 		if (pDatabaseName != null) {
-			if (pDatabaseName.trim() != "") {
+			if (!isEmpty(pDatabaseName.trim())) {
 				setDatabaseFileName(pDatabaseName);
 				
 				this.databaseVersion = pDatabaseVersion;
@@ -318,7 +320,7 @@ public class ObjectContext {
 	 * @return True if success.
 	 */
 	public Boolean backup(File pDestinationFolder) {
-		Boolean returnedValue = true;
+		Boolean returnedValue;
 		
 		try {
 			
@@ -337,7 +339,7 @@ public class ObjectContext {
 	            FileOutputStream out = new FileOutputStream(backupFile);
 	            
 	            byte[] buf = new byte[1024];
-	            int i = 0;
+	            int i;
 	            while ((i = in.read(buf)) != -1) {
 	                out.write(buf, 0, i);
 	            }
@@ -389,8 +391,8 @@ public class ObjectContext {
 	public Boolean restoreFromAssets(String pAssetsFilePath, String pDestinationFilePath) throws AdaFrameworkException {
 		Boolean returnedValue = false;
 		
-		InputStream in = null;
-		OutputStream out = null;
+		InputStream in;
+		OutputStream out;
 		
 		try {
 			AssetManager assetManager = getContext().getAssets();
@@ -405,17 +407,15 @@ public class ObjectContext {
 				out = new FileOutputStream(dbFile);
 				
 				byte[] buf = new byte[1024];
-	            int i = 0;
+	            int i;
 	            while ((i = in.read(buf)) != -1) {
 	                out.write(buf, 0, i);
 	            }
 	            
 	            in.close();
-	            in = null;
-	            out.close();
-	            out = null;
-	            
-	            returnedValue = true;
+				out.close();
+
+				returnedValue = true;
 			}
 		} catch (Exception e) {
 			throw new AdaFrameworkException(e);
@@ -450,7 +450,7 @@ public class ObjectContext {
 	 * @return True if success.
 	 */
 	public Boolean restore(File pSourceFolder) {
-		Boolean returnedValue = true;
+		Boolean returnedValue;
 		
 		try {
 			
@@ -470,7 +470,7 @@ public class ObjectContext {
 	            FileOutputStream out = new FileOutputStream(currentDatabaseFile);
 	            
 	            byte[] buf = new byte[1024];
-	            int i = 0;
+	            int i;
 	            while ((i = in.read(buf)) != -1) {
 	                out.write(buf, 0, i);
 	            }
@@ -588,8 +588,8 @@ public class ObjectContext {
 			
 			DatabaseMerger databaseMerger = new DatabaseMerger(pDataBase);
 			
-			createTableScriptsQueue   = new ArrayList<String>();
-			createIndexesScriptsQueue = new ArrayList<String>();
+			createTableScriptsQueue   = new ArrayList<>();
+			createIndexesScriptsQueue = new ArrayList<>();
 			
 			//Get all declared fields in the Object
 			Field[] declaredFields = this.getClass().getDeclaredFields();
@@ -600,11 +600,11 @@ public class ObjectContext {
 
 						//Only process the ObjectSet properties.
 						if (ReflectionHelper.extendsOf(declaredField.getType(), ObjectSet.class)) {
-							Object  objectSet = null;
+							Object  objectSet;
 							boolean virtualObjectSet = false;
 							
 							if (declaredField.getModifiers() == Modifier.PRIVATE) {
-								Method getterMethod = null;
+								Method getterMethod;
 								try {
 									getterMethod = this.getClass().getMethod(String.format("get%s", DataUtils.capitalize(declaredField.getName())), (Class[])null);
 								} catch (Exception e) {
@@ -633,7 +633,7 @@ public class ObjectContext {
 								if (objectSetConfiguration != null) {
 									virtualObjectSet = objectSetConfiguration.virtual();
 								}
-							} catch (Exception e) { }
+							} catch (Exception ignored) { }
 							
 							//Check if the ObjectSet is virtual or not.
 							if (!virtualObjectSet) {
@@ -664,9 +664,7 @@ public class ObjectContext {
 											
 											String[] customTableIndexScript = ((ObjectSet<?>)objectSet).getDataBaseTableIndexScript();
 											if (customTableIndexScript != null && customTableIndexScript.length > 0) {
-												for(String indexScript : customTableIndexScript) {
-													createIndexesScriptsQueue.add(indexScript);
-												}
+												Collections.addAll(createIndexesScriptsQueue, customTableIndexScript);
 											}
 										}
 										
@@ -684,9 +682,7 @@ public class ObjectContext {
 					if (pAction == DataUtils.DATABASE_ACTION_UPDATE) {
 						String[] dropTablesScripts = databaseMerger.getDatabaseCleanScripts();
 						if (dropTablesScripts != null && dropTablesScripts.length > 0) {
-							for (String dropScript : dropTablesScripts) {
-								createTableScriptsQueue.add(dropScript);
-							}
+							Collections.addAll(createTableScriptsQueue, dropTablesScripts);
 						}
 					}
 					
@@ -728,9 +724,7 @@ public class ObjectContext {
 			if (!inheritedObjectSet.isLinkedSet()) {
 				String[] tableScript = pDatabaseMerger.getDatatableScript(inheritedObjectSet);
 				if (tableScript != null && tableScript.length > 0) {
-					for(String script : tableScript) {
-						createTableScriptsQueue.add(script);
-					}
+					Collections.addAll(createTableScriptsQueue, tableScript);
 				}
 				
 				if (generateTableIndexes) {
@@ -745,9 +739,7 @@ public class ObjectContext {
 					
 					String[] customTableIndexScript = inheritedObjectSet.getDataBaseTableIndexScript();
 					if (customTableIndexScript != null && customTableIndexScript.length > 0) {
-						for(String indexScript : customTableIndexScript) {
-							createIndexesScriptsQueue.add(indexScript);
-						}
+						Collections.addAll(createIndexesScriptsQueue, customTableIndexScript);
 					}
 				}
 				
@@ -786,13 +778,9 @@ public class ObjectContext {
 	private void generateIndex(SQLiteDatabase pDataBase, String pTableIndexScript) throws AdaFrameworkException {
 		Boolean createTable = true;
 		
-		try{
-			
-			if (createTable) {
-				ADALog.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableIndexScript);
-				pDataBase.execSQL(pTableIndexScript);
-			}
-			
+		try {
+			ADALog.d(DataUtils.DEFAULT_MODEL_LOGS_TAG, pTableIndexScript);
+			pDataBase.execSQL(pTableIndexScript);
 		} catch (Exception e) {
 			ExceptionsHelper.manageException(null, new ModelGenerationException("", pTableIndexScript, e.toString(), e));
 		}
@@ -879,7 +867,7 @@ public class ObjectContext {
 	 * @return Application source code version.
 	 */
 	private int getCodeVersion() {
-		int returnedValue = this.databaseVersion;
+		int returnedValue;
 		
 		try {
 			returnedValue = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0).versionCode;
@@ -893,7 +881,7 @@ public class ObjectContext {
 	/**
 	 * Parse entity property value to save into DataBase.
 	 * @param pValue
-	 * @param pMappnig
+	 * @param pMapping
 	 * @return
 	 * @throws AdaFrameworkException 
 	 */
@@ -947,8 +935,9 @@ public class ObjectContext {
 	 * @param date
 	 * @return
 	 */
+	@SuppressLint("SimpleDateFormat")
 	Date StringToDate(String date) {
-		Date returnedValue = new Date();
+		Date returnedValue;
 		
 		try {
 			returnedValue = new SimpleDateFormat(DataUtils.DATE_TIME_FORMAT).parse(date);
@@ -964,6 +953,7 @@ public class ObjectContext {
 	 * @param date
 	 * @return
 	 */
+	@SuppressLint("SimpleDateFormat")
 	String DateToString(Date date) {
 		String returedValue = "NULL";
 
